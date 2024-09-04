@@ -76,6 +76,36 @@ To get a local copy up and running follow these simple steps.
 
 <br/>
 
+# How to get user token
+1. Open Discord
+2. Press `CTRL+SHIFT+I` to open the Developer Console
+3. Copy and paste the code below into the console to automatically copy your user token to the clipboard.
+```js
+window.webpackChunkdiscord_app.push([
+  [Math.random()],
+  {},
+  req => {
+    if (!req.c) {
+      console.error('req.c is undefined or null');
+      return;
+    }
+
+    for (const m of Object.keys(req.c)
+      .map(x => req.c[x].exports)
+      .filter(x => x)) {
+      if (m.default && m.default.getToken !== undefined) {
+        return copy(m.default.getToken());
+      }
+      if (m.getToken !== undefined) {
+        return copy(m.getToken());
+      }
+    }
+  },
+]);
+console.log('%cWorked!', 'font-size: 50px');
+console.log(`%cYou now have your token in the clipboard!`, 'font-size: 16px');
+```
+
 ### Installation on Linux
 
 <!-- Linux / Debian-based install -->
@@ -359,5 +389,5 @@ This repository is distributed under the MIT License. See `LICENSE` for more inf
 [license-shield]: https://img.shields.io/github/license/core-hacked/Discondelete.svg?colorA=1e1e28&colorB=F9C096&style=for-the-badge&logo=starship%20style=for-the-badge
 [license-url]: https://github.com/core-hacked/Discondelete/blob/master/LICENSE
 [python397test-shield]: https://img.shields.io/badge/Python%203.9.7-Working-green?colorA=1e1e28&colorB=B1E3AD&style=for-the-badge&logo=starship%20style=for-the-badge
-[releaselateststable-shield]: https://img.shields.io/badge/Release-Stable%3A%20v1.2.3-blue?colorA=1e1e28&colorB=A4B9EF&style=for-the-badge&logo=starship%20style=for-the-badge
+[releaselateststable-shield]: https://img.shields.io/badge/Release-Stable%3A%20v1.3.0-blue?colorA=1e1e28&colorB=A4B9EF&style=for-the-badge&logo=starship%20style=for-the-badge
 [releaselateststable-url]: https://github.com/core-hacked/Discondelete/releases/latest
